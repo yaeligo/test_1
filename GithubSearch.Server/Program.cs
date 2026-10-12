@@ -82,10 +82,6 @@ app.MapPost("/api/auth/login", (LoginRequest request) =>
             "Demo login credentials are not configured.",
             statusCode: 500);
     }
-    Console.WriteLine($"Expected username: [{expectedUsername}]");
-    Console.WriteLine($"Received username: [{request.Username}]");
-    Console.WriteLine($"Username matches: {request.Username == expectedUsername}");
-    Console.WriteLine($"Password matches: {request.Password == expectedPassword}");
 
     if (string.IsNullOrWhiteSpace(request.Username) ||
         string.IsNullOrWhiteSpace(request.Password) ||
