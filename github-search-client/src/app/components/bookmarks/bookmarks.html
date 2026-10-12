@@ -1,0 +1,31 @@
+<div class="bookmarks-container">
+  <h2>המאגרים השמורים שלי</h2>
+
+  <ng-container *ngIf="bookmarkService.bookmarks$ | async as bookmarks">
+    <div *ngIf="bookmarks.length === 0" class="empty-state">
+      עדיין לא שמרת מאגרים במועדפים.
+    </div>
+
+    <div class="repo-grid" *ngIf="bookmarks.length > 0">
+      <mat-card *ngFor="let repo of bookmarks" class="repo-card">
+        <mat-card-header>
+          <img mat-card-avatar [src]="repo.owner?.avatar_url" alt="Avatar">
+          <mat-card-title>{{ repo.name }}</mat-card-title>
+<mat-card-subtitle>{{ repo.owner?.login }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p class="repo-desc">{{ repo.description || 'אין תיאור זמין' }}</p>
+          <div class="repo-meta">
+            <span>⭐ {{ repo.stargazers_count }}</span>
+          </div>
+        </mat-card-content>
+        <mat-card-actions class="card-actions">
+          <a mat-button [href]="repo.html_url" target="_blank">לצפייה ב-GitHub</a>
+          <button mat-icon-button color="warn" (click)="removeBookmark(repo.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </ng-container>
+</div>

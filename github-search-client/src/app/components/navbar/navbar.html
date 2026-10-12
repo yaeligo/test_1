@@ -1,0 +1,9 @@
+<mat-toolbar color="primary" class="navbar" *ngIf="authService.currentUser$ | async as username">
+  <span>GitHub Repo Search</span>
+  <span class="spacer"></span>
+  
+  <span class="welcome-text">שלום, {{ username }}</span>
+  <button mat-button routerLink="/search">חיפוש</button>
+  <button mat-button routerLink="/bookmarks">מועדפים</button>
+  <button mat-button (click)="onLogout()">התנתק</button>
+</mat-toolbar>

@@ -1,0 +1,39 @@
+<div class="search-page-container">
+  <div class="search-bar-wrapper">
+    <mat-form-field appearance="outline" class="search-input">
+      <mat-label>חפש מאגרי GitHub</mat-label>
+      <input matInput [(ngModel)]="searchQuery" (keyup.enter)="onSearch()" placeholder="לדוגמה: angular">
+    </mat-form-field>
+    <button mat-raised-button color="primary" class="search-button" (click)="onSearch()" [disabled]="isLoading">
+      חפש
+    </button>
+  </div>
+
+  <div *ngIf="isLoading" class="spinner-container">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+
+  <div *ngIf="!isLoading && hasSearched && repositories.length === 0" class="no-results">
+    לא נמצאו מאגרים תואמים.
+  </div>
+
+  <div class="repo-grid" *ngIf="!isLoading && repositories.length > 0">
+    <mat-card *ngFor="let repo of repositories" class="repo-card">
+      <mat-card-header>
+        <img mat-card-avatar [src]="repo.owner?.avatar_url" alt="Avatar">
+        <mat-card-title>{{ repo.name }}</mat-card-title>
+        <mat-card-subtitle>{{ repo.owner?.login }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p class="description">{{ repo.description || 'אין תיאור זמין' }}</p>
+        <div class="stars">⭐ {{ (repo.stargazers_count ?? repo.stargazersCount) ?? 0 }} כוכבים</div>
+      </mat-card-content>
+      <mat-card-actions class="card-actions">
+        <a mat-button color="primary" [href]="repo.html_url" target="_blank">לצפייה ב-GitHub</a>
+        <button mat-icon-button color="accent" (click)="toggleBookmark(repo)">
+          <mat-icon>{{ bookmarkService.isBookmarked(repo.id) ? 'bookmark' : 'bookmark_border' }}</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
