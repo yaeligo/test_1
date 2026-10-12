@@ -111,6 +111,16 @@ Navigate to:
 
 Sign in using the demo credentials configured for the backend.
 
+## Demo Login Credentials
+
+Use the following credentials to sign in to the application:
+
+Username: demo
+
+Password: demopass123
+
+These credentials are intended for demonstration and testing purposes only.
+
 ## Application Workflow
 
 1. Sign in to the application.
